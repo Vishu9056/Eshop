@@ -1,0 +1,41 @@
+{% extends 'base.html' %}
+
+{% block title %} Search {% endblock %}
+
+
+{% block content %}
+
+<div class="container">
+    <div class="row">
+        <div class="col-md-12">
+            <h3>Search Results  <span class="text-info">{{request.GET.keyword}}</span></h3>
+            {% if results|length < 1 %}
+            <p>Sorry! No search result </p>
+            your search querry: <b>{{request.GET.keyword}}</b> did not match any document.<br>
+            Suggestion: 
+            <ul>
+                <li>
+                    Try different keywords............
+                </li>
+            </ul>
+            {% endif %}
+            <hr>
+            {% for result in results %}
+            <div class="row">
+                <div class="col-md-4">
+                    <img src="{{result.image.url}}" class="img-fluid" alt="">
+                </div>
+                <div class="col-md-8">
+                    <h4>{{result.name}}</h4>
+                    <p><img src="https://img.icons8.com/material-outlined/25/000000/rupee.png"/>{{result.price}}</p>
+                    <a href="{{product.id}}" class="btn btn-primary"> Add to Cart </a>
+                    <p>{{result.description|truncatewords:20}}</p>
+                    
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+</div>
+
+{% endblock %}
